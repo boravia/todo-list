@@ -35,8 +35,8 @@ body {
 }
 
 .todo-body {
-  background-color: #A9A8A8;
-  height: 65em;
+  background-color: var(--dark-gray);
+  min-height: 65em;
   width: 45em;
   position: absolute;
   top: 50%; /* Position from the top 50% */
@@ -68,8 +68,7 @@ body {
 }
 
 .btn:hover {
-  color: var(--primary-color);
-  transition: ;
+  color: var(--light-gray);
 }
 
 .toggle {
@@ -98,6 +97,18 @@ body {
   align-items: center;
   font-size: 1.6em;
   grid-template-columns: 1.6em 1fr 1.6em;
+}
+
+.list_element:hover {
+  color: var(--dark-gray);
+  transition: .2s;
+  box-shadow: 0px 1px 20px rgb(240 240 240 / 45%);
+  opacity: 1;
+}
+
+.list_element:hover .remove_btn {
+  opacity: 1;
+  color: var(--dark-gray);
 }
 
 .circle {
