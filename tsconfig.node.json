@@ -9,9 +9,9 @@
   ],
   "compilerOptions": {
     "composite": true,
-    "noEmit": true,
+    "noEmit": false, //changed to false
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
-
+    "allowJs": true,
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "types": ["node"]

@@ -12,6 +12,13 @@
     }
   ],
   "compilerOptions": {
-    "module": "NodeNext"
-  }
+    "module": "CommonJS",
+    "noImplicitAny": false,
+    "allowJs": true
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.vue",
+    "index.d.ts" // added this line to include the declaration file
+  ]
 }
