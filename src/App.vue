@@ -19,13 +19,13 @@ const props = defineProps({
 
 <template>
   <div class="app">
-    <NavigationBar></NavigationBar>
     <div class="todo-body">
-      <div class="navigation">
+      <NavigationBar></NavigationBar>
+      <!-- <div class="navigation">
         <button class="btn">All</button>
         <button class="btn toggle">Todo</button>
         <button class="btn">Done</button>
-      </div>
+      </div> -->
       <ul class="list">
         <li class="list_element">
           <div class="circle"></div>
@@ -46,7 +46,7 @@ const props = defineProps({
   </div>
 </template>
 
-<style scoped>
+<style >
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
 
 *,
@@ -81,11 +81,11 @@ html {
 }
 
 body {
-  color: var(--whitish);
+  /* color: var(--whitish); */
 }
 
 .todo-body {
-  background-color: var(--dark-gray);
+  background-color: var(--light-gray);
   min-height: 65em;
   width: 45em;
   position: absolute;
@@ -127,19 +127,12 @@ body {
   background-color: #7D2A28;
 }
 
-.list {
-  display: grid;
-}
 
-.list_text:hover {
-  color: var(--dark-gray);
-  cursor: default;
-}
 
 .list_element {
   width: auto;
   height: 3em;
-  background: var(--light-gray);
+  background: var(--dark-gray);
   margin: .5em;
   margin-inline: .7em;
   border-radius: .7em;
@@ -151,8 +144,21 @@ body {
   grid-template-columns: 1.6em 1fr 1.6em;
 }
 
+.list {
+  display: grid;
+}
+
+.list_text {
+  color: var(--whitish);
+}
+
+.list_text:hover {
+  color: var(--light-gray);
+  cursor: default;
+}
+
 .list_element:hover {
-  color: var(--dark-gray);
+  color: var(--light-gray);
   transition: .2s;
   box-shadow: 0px 1px 20px rgb(240 240 240 / 45%);
   opacity: 1;
@@ -160,7 +166,7 @@ body {
 
 .list_element:hover .remove_btn {
   opacity: 1;
-  color: var(--dark-gray);
+  color: var(--light-gray);
 }
 
 .circle {
@@ -178,7 +184,8 @@ body {
 
 .remove_btn:hover {
   opacity: 1;
-  color: var(--dark-gray);
+  color: var(--light-gray);
   cursor: pointer;
+  transition: opacity .2s;
 }
 </style>
