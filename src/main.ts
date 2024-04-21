@@ -1,14 +1,10 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 
-import { Icon } from '@iconify/vue';
-import { defineComponent } from 'vue';
 import NavigationBar from "@/components/NavigationBar.vue";
+import './scss/reset.scss';
+import './scss/rules.scss'
 
-
-defineComponent({
-  name: 'MaterialSymbols10kSharp',
-});
 
 const app = createApp(App);
 
