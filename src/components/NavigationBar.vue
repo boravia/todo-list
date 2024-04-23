@@ -1,15 +1,25 @@
 <template>
         <div class="navigation">
-        <button class="btn">All</button>
-        <button class="btn toggle">Todo</button>
-        <button class="btn">Done</button>
+        <button class="btn" :class="{ 'toggle': activeButton === 'All' }" @click="activateButton('All')">All</button>
+        <button class="btn" :class="{ 'toggle': activeButton === 'Todo' }" @click="activateButton('Todo')">Todo</button>
+        <button class="btn" :class="{ 'toggle': activeButton === 'Done' }" @click="activateButton('Done')">Done</button>
       </div>
 
 </template>
 
 <script>
     export default {
-      
+      data() {
+        return {
+          activeButton: 'All'
+
+        }
+      },
+      methods: {
+        activateButton(button) {
+      this.activeButton = button;
+        }
+      }
     }
 </script>
 
@@ -38,6 +48,7 @@
 
 .btn:hover {
   color: var(--light-gray);
+  cursor: pointer;
 }
 
 .toggle {
