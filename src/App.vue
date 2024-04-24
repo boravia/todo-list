@@ -1,48 +1,16 @@
 <script setup lang="ts">
 import NavigationBar from './components/NavigationBar.vue';
-import { Icon } from '@iconify/vue';
-import { defineComponent } from 'vue';
-// import 'iconify-icon';к
-
-// defineComponent({
-//   name: 'MaterialSymbols10kSharp',
-// });
-const props = defineProps({
-  props: {
-    
-  }
-});
-
-
-
+import CheckList from './components/CheckList.vue';
+import FooterApp from './components/FooterApp.vue';
 </script>
 
 <template>
   <div class="app">
     <div class="todo-body">
       <NavigationBar></NavigationBar>
-      <!-- <div class="navigation">
-        <button class="btn">All</button>
-        <button class="btn toggle">Todo</button>
-        <button class="btn">Done</button>
-      </div> -->
-      <ul class="list">
-        <li class="list_element">
-          <div class="circle"></div>
-          <span class="list_text">Download App</span>
-          <button class="remove_btn">
-            <Icon icon="ph:trash" />
-          </button>
-        </li>
-        <li class="list_element">
-          <div class="circle"></div>
-          <span class="list_text">Use App</span>
-          <button class="remove_btn">
-            <Icon icon="ph:trash" />
-          </button>
-        </li>
-      </ul>
+      <CheckList></CheckList>
     </div>
+    <FooterApp></FooterApp>
   </div>
 </template>
 
@@ -53,69 +21,8 @@ const props = defineProps({
   width: 45em;
   position: absolute;
   top: 50%;
-  /* Position from the top 50% */
   left: 50%;
-  /* Position from the left 50% */
   transform: translate(-50%, -50%);
   border-radius: .7em;
-}
-
-.list_element {
-  width: auto;
-  height: 3em;
-  background: var(--dark-gray);
-  margin: .5em;
-  margin-inline: .7em;
-  border-radius: .7em;
-  padding: .7em;
-  display: grid;
-  gap: .7em;
-  align-items: center;
-  font-size: 1.6em;
-  grid-template-columns: 1.6em 1fr 1.6em;
-}
-
-.list {
-  display: grid;
-}
-
-.list_text {
-  color: var(--whitish);
-}
-
-.list_element:hover {
-  color: var(--light-gray);
-  transition: .2s;
-  box-shadow: 0px 1px 20px rgb(240 240 240 / 45%);
-  opacity: 1;
-  .list_text {
-    color: var(--light-gray);
-    /* cursor: default; */
-  }
-}
-
-.list_element:hover .remove_btn {
-  opacity: 1;
-  color: var(--light-gray);
-}
-
-.circle {
-  width: 1em;
-  height: 1em;
-  background-color: var(--secondary-color);
-  border-radius: 50%;
-}
-
-.remove_btn {
-  opacity: 0;
-  color: var(--light-gray);
-  transition: opacity .2s;
-}
-
-.remove_btn:hover {
-  opacity: 1;
-  color: var(--light-gray);
-  cursor: pointer;
-  transition: opacity .2s;
 }
 </style>
