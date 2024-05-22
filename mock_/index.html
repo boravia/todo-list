@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://code.iconify.design/2/2.0.4/iconify.min.js"></script>
+    <title>Todo App</title>
+  </head>
+  <body>
+    <div class="app">
+      <div class="todo-body">
+        <!-- Navigation Bar -->
+        <div class="navigation">
+          <button class="btn toggle" data-filter="all">All</button>
+          <button class="btn" data-filter="todo">Todo</button>
+          <button class="btn" data-filter="done">Done</button>
+        </div>
+
+        <!-- Check List -->
+        <ul class="list">
+          <li class="list_element" data-status="todo">
+            <div class="circle"></div>
+            <span class="list_text">Download App</span>
+            <button class="remove_btn">
+              <span class="iconify" data-icon="ph:trash"></span>
+            </button>
+          </li>
+          <li class="list_element" data-status="todo">
+            <div class="circle"></div>
+            <span class="list_text">Use App</span>
+            <button class="remove_btn">
+              <span class="iconify" data-icon="ph:trash"></span>
+            </button>
+          </li>
+        </ul>
+
+        <!-- New List Element -->
+        <div class="liAdder">
+          <div class="liAdder__addBtn">
+            <span class="iconify liAdder__icon" data-icon="ph:plus"></span>
+          </div>
+        </div>
+
+        <!-- Input Form -->
+        <div class="inputForm" style="display: none">
+          <input
+            class="inputForm__inputField"
+            type="text"
+            placeholder="New task"
+          />
+          <span class="iconify inputForm__close" data-icon="ph:x"></span>
+          <button class="inputForm__btn">Submit</button>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer class="footer">made by Adilkhan</footer>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const filters = document.querySelectorAll(".btn");
+        const listElements = document.querySelectorAll(".list_element");
+        const liAdder = document.querySelector(".liAdder");
+        const inputForm = document.querySelector(".inputForm");
+        const addBtn = document.querySelector(".liAdder__addBtn");
+        const closeBtn = document.querySelector(".inputForm__close");
+        const submitBtn = document.querySelector(".inputForm__btn");
+        const inputField = document.querySelector(".inputForm__inputField");
+
+        // Navigation filter logic
+        filters.forEach((filter) => {
+          filter.addEventListener("click", () => {
+            filters.forEach((btn) => btn.classList.remove("toggle"));
+            filter.classList.add("toggle");
+            const filterType = filter.dataset.filter;
+
+            listElements.forEach((element) => {
+              if (filterType === "all") {
+                element.style.display = "grid";
+              } else {
+                element.style.display =
+                  element.dataset.status === filterType ? "grid" : "none";
+              }
+            });
+          });
+        });
+
+        // Toggle input form visibility
+        addBtn.addEventListener("click", () => {
+          inputForm.style.display = "flex";
+        });
+
+        closeBtn.addEventListener("click", () => {
+          inputForm.style.display = "none";
+        });
+
+        // Add new task
+        submitBtn.addEventListener("click", () => {
+          const taskText = inputField.value.trim();
+          if (taskText) {
+            const newTask = document.createElement("li");
+            newTask.classList.add("list_element");
+            newTask.dataset.status = "todo";
+            newTask.innerHTML = `
+            <div class="circle"></div>
+            <span class="list_text">${taskText}</span>
+            <button class="remove_btn">
+              <span class="iconify" data-icon="ph:trash"></span>
+            </button>
+          `;
+            document.querySelector(".list").appendChild(newTask);
+            inputField.value = "";
+            inputForm.style.display = "none";
+          }
+        });
+
+        // Remove task logic
+        document.addEventListener("click", (event) => {
+          if (event.target.closest(".remove_btn")) {
+            event.target.closest(".list_element").remove();
+          }
+        });
+
+        // Handle clicks outside the input form to close it
+        document.addEventListener("click", (event) => {
+          if (
+            inputForm.style.display === "flex" &&
+            !inputForm.contains(event.target) &&
+            !liAdder.contains(event.target)
+          ) {
+            inputForm.style.display = "none";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
