@@ -2,6 +2,7 @@
 import NavigationBar from './components/NavigationBar.vue';
 import CheckList from './components/CheckList.vue';
 import FooterApp from './components/FooterApp.vue';
+import NewListElement from './components/NewListElement.vue';
 </script>
 
 <template>
@@ -9,6 +10,7 @@ import FooterApp from './components/FooterApp.vue';
     <div class="todo-body">
       <NavigationBar></NavigationBar>
       <CheckList></CheckList>
+      <NewListElement></NewListElement>
     </div>
     <FooterApp></FooterApp>
   </div>

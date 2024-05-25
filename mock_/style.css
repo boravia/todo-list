@@ -206,3 +206,8 @@ body {
   padding: 10px 0;
   text-align: center;
 }
+
+.list_element_done {
+  text-decoration: line-through;
+  color: #333;
+}

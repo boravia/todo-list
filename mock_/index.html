@@ -49,7 +49,9 @@
             type="text"
             placeholder="New task"
           />
-          <button class="inputForm__close"><span class="iconify" data-icon="ph:x"></span></button>
+          <button class="inputForm__close">
+            <span class="iconify" data-icon="ph:x"></span>
+          </button>
           <button class="inputForm__btn">Submit</button>
         </div>
       </div>
@@ -60,6 +62,7 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", () => {
+        const list = document.querySelector(".list");
         const filters = document.querySelectorAll(".btn");
         const listElements = document.querySelectorAll(".list_element");
         const liAdder = document.querySelector(".liAdder");
@@ -68,6 +71,7 @@
         const closeBtn = document.querySelector(".inputForm__close");
         const submitBtn = document.querySelector(".inputForm__btn");
         const inputField = document.querySelector(".inputForm__inputField");
+        const todoListItem = document.querySelector(".list_text");
 
         // Navigation filter logic
         filters.forEach((filter) => {
@@ -110,7 +114,7 @@
               <span class="iconify" data-icon="ph:trash"></span>
             </button>
           `;
-            document.querySelector(".list").appendChild(newTask);
+            list.appendChild(newTask); // list refers to the parent list container
             inputField.value = "";
             inputForm.style.display = "none";
           }
@@ -131,6 +135,23 @@
             !liAdder.contains(event.target)
           ) {
             inputForm.style.display = "none";
+          }
+        });
+
+        // Done todo items logic
+        list.addEventListener("click", (event) => {
+          if (event.target.closest(".list_element")) {
+            const listElement = event.target.closest(".list_element");
+
+            // Mark as done
+            listElement.classList.toggle("list_element_done");
+            listElement.dataset.status = listElement.classList.contains(
+              "list_element_done") ? "done" : "todo";
+          }
+
+          // Remove task logic
+          if (event.target.closest(".remove_btn")) {
+            event.target.closest(".list_element").remove();
           }
         });
       });

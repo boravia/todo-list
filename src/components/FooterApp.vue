@@ -16,7 +16,7 @@
   bottom: 0;
   width: 100%;
   color: #333;
-  padding: 20px 0;
+  padding: 10px 0;
   text-align: center;
   cursor: default;
 }

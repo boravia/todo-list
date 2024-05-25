@@ -3,9 +3,11 @@ import App from './App.vue'
 
 import NavigationBar from "@/components/NavigationBar.vue";
 import CheckList from './components/CheckList.vue';
-import FooterApp from './components/FooterApp.vue'
+import FooterApp from './components/FooterApp.vue';
+import NewListElement from './components/NewListElement.vue';
+
 import './scss/reset.scss';
-import './scss/rules.scss'
+import './scss/rules.scss';
 
 
 const app = createApp(App);
@@ -17,6 +19,7 @@ function registerComponent(app: any, component: any): void {
 registerComponent(app, NavigationBar);
 registerComponent(app, CheckList);
 registerComponent(app, FooterApp);
+registerComponent(app, NewListElement);
 
 
 
