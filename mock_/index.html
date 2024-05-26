@@ -64,14 +64,29 @@
       document.addEventListener("DOMContentLoaded", () => {
         const list = document.querySelector(".list");
         const filters = document.querySelectorAll(".btn");
-        const listElements = document.querySelectorAll(".list_element");
         const liAdder = document.querySelector(".liAdder");
         const inputForm = document.querySelector(".inputForm");
-        const addBtn = document.querySelector(".liAdder");
         const closeBtn = document.querySelector(".inputForm__close");
         const submitBtn = document.querySelector(".inputForm__btn");
         const inputField = document.querySelector(".inputForm__inputField");
-        const todoListItem = document.querySelector(".list_text");
+
+        function addTask(taskText) {
+          if (taskText) {
+            const newTask = document.createElement("li");
+            newTask.classList.add("list_element");
+            newTask.dataset.status = "todo";
+            newTask.innerHTML = `
+      <div class="circle"></div>
+      <span class="list_text">${taskText}</span>
+      <button class="remove_btn">
+        <span class="iconify" data-icon="ph:trash"></span>
+      </button>
+    `;
+            list.appendChild(newTask); // list refers to the parent list container
+            inputField.value = "";
+            inputForm.style.display = "none";
+          }
+        }
 
         // Navigation filter logic
         filters.forEach((filter) => {
@@ -80,7 +95,7 @@
             filter.classList.add("toggle");
             const filterType = filter.dataset.filter;
 
-            listElements.forEach((element) => {
+            document.querySelectorAll(".list_element").forEach((element) => {
               if (filterType === "all") {
                 element.style.display = "grid";
               } else {
@@ -92,7 +107,7 @@
         });
 
         // Toggle input form visibility
-        addBtn.addEventListener("click", () => {
+        liAdder.addEventListener("click", () => {
           inputForm.style.display = "flex";
         });
 
@@ -103,20 +118,14 @@
         // Add new task
         submitBtn.addEventListener("click", () => {
           const taskText = inputField.value.trim();
-          if (taskText) {
-            const newTask = document.createElement("li");
-            newTask.classList.add("list_element");
-            newTask.dataset.status = "todo";
-            newTask.innerHTML = `
-            <div class="circle"></div>
-            <span class="list_text">${taskText}</span>
-            <button class="remove_btn">
-              <span class="iconify" data-icon="ph:trash"></span>
-            </button>
-          `;
-            list.appendChild(newTask); // list refers to the parent list container
-            inputField.value = "";
-            inputForm.style.display = "none";
+          addTask(taskText);
+        });
+
+        // Add new task on Enter key press
+        inputField.addEventListener("keydown", (event) => {
+          if (event.key === "Enter") {
+            const taskText = inputField.value.trim();
+            addTask(taskText);
           }
         });
 
@@ -144,9 +153,14 @@
             const listElement = event.target.closest(".list_element");
 
             // Mark as done
-            listElement.classList.toggle("list_element_done");
-            listElement.dataset.status = listElement.classList.contains(
-              "list_element_done") ? "done" : "todo";
+            if (!event.target.closest(".remove_btn")) {
+              listElement.classList.toggle("list_element_done");
+              listElement.dataset.status = listElement.classList.contains(
+                "list_element_done"
+              )
+                ? "done"
+                : "todo";
+            }
           }
 
           // Remove task logic
