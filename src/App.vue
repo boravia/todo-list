@@ -16,15 +16,5 @@ import NewItemButton from './components/NewItemButton.vue';
   </div>
 </template>
 
-<style >
-.todo-body {
-  background-color: var(--light-gray);
-  min-height: 65em;
-  width: 45em;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: .7em;
-}
+<style lang="scss">
 </style>

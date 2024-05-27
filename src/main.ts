@@ -6,8 +6,7 @@ import App from './App.vue'
 // import FooterApp from './components/FooterApp.vue';
 // import NewListElement from './components/NewItem.vue';
 
-import './scss/reset.scss';
-import './scss/rules.scss';
+
 
 
 const app = createApp(App);
