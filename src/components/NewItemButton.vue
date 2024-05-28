@@ -1,13 +1,13 @@
 <template>
-    <div class="liAdder" ref="liAdder">
-        <div class="liAdder__addBtn" @click="toggleInputForm" >
+    <div class="liAdder" ref="liAdder" @click="toggleInputForm">
+        <div class="liAdder__addBtn"  >
             <Icon icon="ph:plus" class="liAdder__icon" />
         </div>
-        <div v-if="showInputForm" class="inputForm" ref="inputForm">
-            <input class="inputForm__inputField" type="text">
-            <Icon icon="ph:x" class="inputForm__close" @click="toggleInputForm" />
-            <button class="inputForm__btn">Submit</button>
-        </div>
+    </div>
+    <div v-if="showInputForm" class="inputForm" ref="inputForm">
+        <input class="inputForm__inputField" type="text" placeholder="New task">
+        <Icon icon="ph:x" class="inputForm__close" @click="toggleInputForm" />
+        <button class="inputForm__btn">Submit</button>
     </div>
 </template>
 
@@ -27,10 +27,11 @@ export default {
         toggleInputForm() {
             this.showInputForm = !this.showInputForm;
         },
-        handleClickOutside(event) {
+        handleClickOutside(event: MouseEvent) {
             if (this.showInputForm) {
                 const liAdder = this.$refs.liAdder;
-                if (liAdder && !liAdder.contains(event.target)) {
+                const inputForm = this.$refs.inputForm;
+                if (liAdder && !liAdder.contains(event.target) && inputForm && !inputForm.contains(event.target)) {
                     this.toggleInputForm();
                 }
             }
