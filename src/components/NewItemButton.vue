@@ -13,6 +13,7 @@
 
 <script lang="ts">
 import { Icon } from '@iconify/vue';
+
 export default {
     components: {
         Icon,

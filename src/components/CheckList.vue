@@ -1,6 +1,6 @@
 <template>
   <ul class="list">
-    <ListItem :item="item" v-for="item in items" :key="item.id" @toggle-item="toggleItem"></ListItem>
+    <ListItem :item="item" v-for="item in items" :key="item.id" @toggle-item="toggleItem" @remove-item="removeItem"></ListItem>
   </ul>
 </template>
 
@@ -28,7 +28,10 @@ export default {
   methods: {
     toggleItem(id: number) {
       const targetItem = this.items.find((item: Item) => item.id === id)
-      targetItem.completed = !targetItem.completed
+      targetItem.completed = !targetItem.completed;
+    },
+    removeItem(id: number) {
+      this.items = this.items.filter((item: Item) => item.id !== id);
     }
   }
 }

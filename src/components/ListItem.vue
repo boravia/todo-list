@@ -2,7 +2,7 @@
     <li class="list_element" :class="{'list_element_done': item.completed}" @click="toggleItem">
       <div class="circle"></div>
       <span class="list_text">{{ item.text }}</span>
-      <button class="remove_btn">
+      <button class="remove_btn" @click.stop="removeItem">
         <Icon icon="ph:trash" />
       </button>
     </li>
@@ -26,10 +26,14 @@ import { Item } from '../../types/Item';
         methods: {
             toggleItem() {
                 this.$emit('toggleItem', this.item.id)
+            },
+            removeItem() {
+                this.$emit('removeItem', this.item.id)
             }
         },
         emits: {
-            toggleItem: (id: number) => Number.isInteger(id)
+            toggleItem: (id: number) => Number.isInteger(id),
+            removeItem: (id: number) => Number.isInteger(id)
         }
     }
 </script>
