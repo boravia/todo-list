@@ -4,14 +4,19 @@
   </ul>
 </template>
 
-<script>
+<script lang="ts">
+import { Item } from '../../types/Item';
 import ListItem from './ListItem.vue';
+
+interface State {
+  items: Item[];
+}
 
 export default {
   components: {
     ListItem,
   },
-  data() {
+  data(): State {
     return{
       items: [
       {id: 0, text: 'Download App', completed: false},

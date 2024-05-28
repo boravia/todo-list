@@ -1,5 +1,5 @@
 <template>
-    <li class="list_element" :class="{'list_element_done': item.completed}">
+    <li class="list_element" :class="{'list_element_done': item.completed}" @click="toggleItem">
       <div class="circle"></div>
       <span class="list_text">{{ item.text }}</span>
       <button class="remove_btn">
@@ -22,6 +22,14 @@ import { Item } from '../../types/Item';
                 type: Object as PropType<Item>,
                 required: true
             }
+        },
+        methods: {
+            toggleItem() {
+                this.$emit('toggleItem', this.number.id)
+            }
+        },
+        emits: {
+            toggleItem: (id: number) => Number.isInteger(id)
         }
     }
 </script>
