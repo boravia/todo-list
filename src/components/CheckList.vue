@@ -5,34 +5,30 @@
 </template>
 
 <script lang="ts">
+import { PropType } from 'vue';
 import { Item } from '../../types/Item';
 import ListItem from './ListItem.vue';
-
-interface State {
-  items: Item[];
-}
 
 export default {
   components: {
     ListItem,
   },
-  data(): State {
-    return{
-      items: [
-      {id: 0, text: 'Download App', completed: false},
-      {id: 1, text: 'Use App', completed: false},
-      {id: 2, text: 'Close App', completed: true}
-      ]
-    }
-  },
+ props: {
+  items: {
+    type: Array as PropType<Item[]>
+  }
+ },
   methods: {
     toggleItem(id: number) {
-      const targetItem = this.items.find((item: Item) => item.id === id)
-      targetItem.completed = !targetItem.completed;
+      this.$emit('toggleItem', id)
     },
     removeItem(id: number) {
-      this.items = this.items.filter((item: Item) => item.id !== id);
+      this.$emit('removeItem', id)
     }
+  },
+  emits: {
+    toggleItem: (id: number) => Number.isInteger(id),
+    removeItem: (id: number) => Number.isInteger(id)
   }
 }
 </script>
