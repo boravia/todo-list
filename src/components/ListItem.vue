@@ -25,7 +25,7 @@ import { Item } from '../../types/Item';
         },
         methods: {
             toggleItem() {
-                this.$emit('toggleItem', this.number.id)
+                this.$emit('toggleItem', this.item.id)
             }
         },
         emits: {
