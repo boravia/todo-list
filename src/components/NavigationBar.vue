@@ -1,27 +1,41 @@
 <template>
         <div class="navigation">
-        <button class="btn" :class="{ 'toggle': activeButton === 'All' }" @click="activateButton('All')">All</button>
-        <button class="btn" :class="{ 'toggle': activeButton === 'Todo' }" @click="activateButton('Todo')">Todo</button>
-        <button class="btn" :class="{ 'toggle': activeButton === 'Done' }" @click="activateButton('Done')">Done</button>
+        <button class="btn" v-for="buttonState in activeButtons" :key="buttonState" :class="{ 'toggle': activeButton === buttonState }" @click="setButton(buttonState)">{{ buttonState }}</button>
+
       </div>
 
 </template>
 
-<script>
-    export default {
-      data() {
-        return {
-          activeButton: 'All'
+<script lang="ts">
+import { PropType } from 'vue';
+import { ActiveButton } from '../../types/ActiveButton';
 
+interface State {
+  activeButtons: ActiveButton[]
+}
+
+    export default {
+      props: {
+        activeButton: {
+          type: String as PropType<ActiveButton>,
+          required: true
+        }
+      },
+      data(): State {
+        return {
+          activeButtons: ['All', 'Todo', 'Done'] as ActiveButton[]
         }
       },
       methods: {
-        activateButton(button) {
-      this.activeButton = button;
+        setButton(buttonState: ActiveButton) {
+          this.$emit('setButton', buttonState)
         }
+      },
+      emits: { 
+       setButton: (buttonState: ActiveButton) => typeof buttonState === 'string'
+
       }
     }
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

@@ -1,8 +1,8 @@
 <template>
   <div class="app">
     <div class="todo-body">
-      <NavigationBar></NavigationBar>
-      <CheckList :items="items" @remove-item="removeItem" @toggle-item="toggleItem"></CheckList>
+      <NavigationBar :active-button="activeButton" @setButton="setButton"></NavigationBar>
+      <CheckList :items="filteredItems" @remove-item="removeItem" @toggle-item="toggleItem"></CheckList>
       <NewItemButton @add-item="addItem"></NewItemButton>
     </div>
     <FooterApp></FooterApp>
@@ -15,9 +15,11 @@ import CheckList from './components/CheckList.vue';
 import FooterApp from './components/FooterApp.vue';
 import NewItemButton from './components/NewItemButton.vue';
 import { Item } from '../types/Item';
+import { ActiveButton } from '../types/ActiveButton';
 
 interface State {
-  items: Item[];
+  items: Item[],
+  activeButton: ActiveButton
 }
 
 export default {
@@ -30,12 +32,13 @@ export default {
       {id: 0, text: 'Download App', completed: false},
       {id: 1, text: 'Use App', completed: false},
       {id: 2, text: 'Close App', completed: true}
-      ]
+      ],
+      activeButton: 'All' as ActiveButton
     }
 },
   methods: {
     addItem(item: Item) {
-      console.log(item)
+      this.items.push(item)
     },
     toggleItem(id: number) {
       const targetItem = this.items.find((item: Item) => item.id === id)
@@ -43,6 +46,18 @@ export default {
     },
     removeItem(id: number) {
       this.items = this.items.filter((item: Item) => item.id !== id);
+    },
+    setButton(buttonState: ActiveButton) {
+      this.activeButton = buttonState
+    }
+  },
+  computed: {
+    filteredItems(): Item[] {
+      switch (this.activeButton) {
+        case 'Todo': return this.items.filter(Item => !Item.completed)
+        case 'Done': return this.items.filter(Item => Item.completed)
+        case 'All': default: return this.items
+      }
     }
   }
 }
